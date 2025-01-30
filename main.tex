@@ -1,0 +1,122 @@
+% this is the GitHub version which doesn't include my personal info
+% reconstructed from Libre CV - https://www.overleaf.com/latex/templates/libre-cv/bmdtjqdhwtsz
+
+\documentclass[11pt]{article}
+\usepackage[english]{babel} % Use hyphens properly and other grammar rules
+\usepackage{paracol} % The template was initially multicolumn, feel free to use if you want a two column CV. It's still used at top section. 
+\usepackage{fontawesome5} % Little icons like "LinkedIn" or link
+\usepackage{hyperref} % For hrefs with URLs
+\usepackage{geometry} % Modify overall size of page
+\usepackage[inline]{enumitem} % For horizontal lists and to configure list item spaces and labels
+\usepackage{titlesec} % Customize section titles
+\usepackage{etoolbox} % For /ifblank conditional
+\usepackage{xhfill} % For dotted lines in front of date intervals
+\usepackage[dvipsnames]{xcolor} % To put CV version and ATS specific text in white
+\usepackage{subfiles} % Import personal info, prev experience and skill sections files (which can be auto-generated via scripts)
+\usepackage[defaultsans]{droidsans} % Select and set default font
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+% make the doc bigger than a regular text doc on A4 and get rid of regular style
+\geometry{hmargin=1cm, vmargin=1cm}
+\pagestyle{empty}
+
+% custom section titles
+\titleformat{\section}{\slshape\Large\centering}{}{0em}{}
+\titlespacing{\section}{0pt}{\smallskipamount}{\smallskipamount}
+\newcommand{\cvtitle}[2]{\centering{\sffamily\huge #1}\\\smallskip{\sffamily\Large{#2}}}
+
+% various custom CV elements
+\newcommand{\companyname}[2]{\noindent{\Large{\textbf{#1}} \ifblank{#2}{}{\Large{\href{#2}{\faLink}}} }}
+\newcommand{\companyexplanation}[1]{\ifblank{#1}{\unskip}{\noindent{\textit{\small{(#1)}}} \\ }}
+
+\newcommand{\rolename}[1]{\noindent{\large{\textbf{#1}}}}
+
+\newcommand{\dottedvline}[0]{\xdotfill[0.5ex]{0.1pt}}
+\newcommand{\beingroleitemize}{
+\small
+\begin{itemize}[noitemsep,leftmargin=3.5mm,rightmargin=0mm,topsep=1pt]}
+\newcommand{\endroleitemize}{\smallskip \end{itemize}}
+
+\newenvironment{company}[6]
+{\smallskip
+\ifblank{#3}{
+\companyname{#1}{#6}\normalsize{\dottedvline \ #4 -- #5}}
+{
+\companyname{#1}{#6}\titlerule \ #4 -- #5 \\
+\smallskip \companyexplanation{#2}
+\rolename{#3}}
+\beingroleitemize
+}
+{\endroleitemize}
+
+\newcommand{\multirolecompanyheader}[3]{\smallskip
+\noindent{\companyname{#1}{#3}\titlerule \\ \smallskip \companyexplanation{#2}}}
+
+\newenvironment{multirolecompanyrole}[3]
+{
+\rolename{#1}\normalsize{ \dottedvline  #2 -- #3}
+\beingroleitemize
+}
+{\endroleitemize}
+
+\newenvironment{skill}[1]
+{
+\noindent{\large{\textbf{#1}}}
+\small
+\begin{itemize*}[noitemsep,before=\unskip{:},itemjoin={{ \textperiodcentered{}}},label=]
+}
+{\end{itemize*}}
+
+\newcommand{\singleskill}[1]{\noindent{\large{\textbf{#1}}}}
+
+% import params like name, title, phone, email etc
+\input{params}
+
+\begin{document}
+
+% title / info table
+\columnratio{0.70}
+\begin{paracol}{2}
+\vspace*{\fill}
+\cvtitle{\Pname}{\Ptitle}
+% you can remove visa status if you don't need one
+\\ \normalsize{\textbf{Visa Status:} \Pworkvisa}
+\vspace*{\fill}
+
+\switchcolumn
+\begin{tabular}{cl}
+  % you can also add your social media accounts if relevant
+  % check out font awesome's own site for alternative icons
+  % but note that not everything exists in fontawesome5 package
+  \small\faPhone & \Pphone \\
+  \small\faEnvelope & \Pemaillink \\
+  \small\faLinkedin & \Plinkedinlink \\
+  \small\faGithub & \Pgithublink \\
+  \small\faPenNib & \Pbloglink \\
+\end{tabular}
+
+\end{paracol}
+
+% rest of the CV sections
+\section*{PERSONAL STATEMENT}
+\small
+\subfile{personal-statement}
+
+\section*{WORK EXPERIENCE}
+\subfile{experience}
+
+\section*{EDUCATION}
+% My education section is quite simple since I don't have much going on here
+\noindent{\large{\textbf{\Peducation} \normalsize{\dottedvline \ \Peducationyear }}}
+
+\section*{SKILLS}
+\begin{itemize}[leftmargin=0mm,rightmargin=0mm,topsep=1pt,label=,ref=] 
+\setlength\itemsep{0.6pt}
+\subfile{skills}
+\end{itemize}
+
+\noindent
+\tiny{\color{White} CV version: 0 }
+
+\end{document}

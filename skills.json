@@ -1,0 +1,36 @@
+{ "skills": [
+    {
+        "name": "Programming languages and frameworks",
+        "type": "technologies",
+        "tags": ["software development"],
+        "subskills": ["Python/Flask/Django", "C#/.Net Core/LINQ", "Java/Spring"]
+    },
+    {
+        "name": "OOP design patterns & architecture",
+        "tags": ["software development"],
+        "type": "general_tech_skill"
+    },
+    {
+        "name": "Unit tests and integration / functional tests",
+        "tags": ["testing", "software development", "DevOps", "sdlc"],
+        "type": "general_tech_skill"
+    },
+    {
+        "name": "RDBMSs and NoSQL databases",
+        "type": "technologies",
+        "tags": ["software development", "IT infra", "data"],
+        "subskills": ["MS SQL", "MySQL/MariaDB", "DynamoDB", "MongoDB"]
+    },
+    {
+        "name": "CI/CD and deployment pipelines",
+        "tags": ["DevOps"],
+        "type": "technologies",
+        "subskills": ["AWS CodeDeploy", "GitHub Actions"]
+    },
+    {
+        "name": "Infrastructure as Code",
+        "tags": ["IT infra", "DevOps"],
+        "type": "general_tech_skill",
+        "subskills": ["Terraform", "CDK/CFN"]
+    }
+]}
