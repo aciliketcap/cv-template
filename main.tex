@@ -19,7 +19,7 @@
 
 % make the doc bigger than a regular text doc on A4 and get rid of regular style
 \geometry{hmargin=1cm, vmargin=1cm}
-\pagestyle{empty}
+\pagestyle{empty} %remove headers, footers etc
 
 % custom section titles
 \titleformat{\section}{\slshape\Large\centering}{}{0em}{}
@@ -36,7 +36,8 @@
 \newcommand{\beingroleitemize}{
 \small
 \begin{itemize}[noitemsep,leftmargin=3.5mm,rightmargin=0mm,topsep=1pt]}
-\newcommand{\endroleitemize}{\smallskip \end{itemize}}
+% "End" since commands starting with "end" are illegal
+\newcommand{\Endroleitemize}{\smallskip \end{itemize}}
 
 \newenvironment{company}[6]
 {\smallskip
@@ -48,7 +49,7 @@
 \rolename{#3}}
 \beingroleitemize
 }
-{\endroleitemize}
+{\Endroleitemize}
 
 \newcommand{\multirolecompanyheader}[3]{\smallskip
 \noindent{\companyname{#1}{#3}\titlerule \\ \smallskip \companyexplanation{#2}}}
@@ -58,7 +59,7 @@
 \rolename{#1}\normalsize{ \dottedvline  #2 -- #3}
 \beingroleitemize
 }
-{\endroleitemize}
+{\Endroleitemize}
 
 \newenvironment{skill}[1]
 {
@@ -69,6 +70,13 @@
 {\end{itemize*}}
 
 \newcommand{\singleskill}[1]{\noindent{\large{\textbf{#1}}}}
+
+% commands for adding info at the end of the last page, preferably invisible
+\renewcommand{\footnoterule}{} % don't draw a footnote ruler
+% from https://tex.stackexchange.com/a/30723, this gives a warning but I don't care
+\makeatletter
+\def\freefootnote{\gdef\@thefnmark{}\@footnotetext}
+\makeatother
 
 % import params like name, title, phone, email etc
 \input{params}
@@ -116,7 +124,6 @@
 \subfile{skills}
 \end{itemize}
 
-\noindent
-\tiny{\color{White} CV version: 0 }
+\freefootnote{\subfile{footer}}
 
 \end{document}

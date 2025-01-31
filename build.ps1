@@ -17,7 +17,7 @@ if (-Not $?) { $CommitHash = "0" }
 $OverleafProjectName = (git rev-parse --abbrev-ref HEAD)
 if (-Not $? -or $Branch -eq 'HEAD') { $OverleafProjectName = (Split-Path $PSScriptRoot -Leaf) }
 
-(Get-Content main.tex) -replace 'CV version:.*}', "CV version: $CommitHash }" | Out-File main.tex
+(Get-Content footer.tex) -replace 'CV version:.*}', "CV version: $CommitHash }" | Out-File footer.tex
 
 Write-Host $Branch
 Compress-Archive -Path "main.tex", "params.tex", "personal-statement.tex", "experience.tex", "skills.tex" -DestinationPath "${OverleafProjectName}.zip" -Force

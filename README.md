@@ -17,11 +17,13 @@ So I wanted to spend some effort and hold my CV in code form (CV-as-Code if you 
 - Run `build.ps1` and upload the `.zip` file to Overleaf as a new project. Create and download the PDF.
   - You can provide tags like `-Tags "DevOps","IT infra"`. They must match the tags in `skills.json`.
   - The CV will contain an invisible (white on white) line at the end which contains the latest commit hash. To be able to find it later you need to take care and push every time you build a CV in case you delete or edit the local commit.
+- You may want to iterate a bit and when you're done, commit the final build which contains the latest-greatest commit hash to finalize
 
 ### TODO:
 - Use Python for build instead of Powershell or bash
 - Use Jinja to produce `skills.tex` instead of `jq`
 
-### Feature Requests (which I probably won't implement):
+### Feature Requests (which I don't strongly consider implementing):
 - Initially I thought I'd group skills like "Soft Skills", "Tech", "Knowledge" etc. Or maybe make a bullet list but with relevant icons per skill. That's why there is a `"type"` field in `skills.json`
 - Come up with a way to link skills to roles so that they can be listed under them
+- Option to add some skills white-on-white, for the ATSs. Just like how people used to do in websites for SEO during 2000s.
