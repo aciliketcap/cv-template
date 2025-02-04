@@ -14,11 +14,13 @@ else
 $CommitHash = (git rev-parse HEAD)
 if (-Not $?) { $CommitHash = "0" }
 
+# TODO: in general we should raise a warning if there are uncommitted changes in project files!
 $OverleafProjectName = (git rev-parse --abbrev-ref HEAD)
 if (-Not $? -or $Branch -eq 'HEAD') { $OverleafProjectName = (Split-Path $PSScriptRoot -Leaf) }
 
 (Get-Content footer.tex) -replace 'CV version:.*}', "CV version: $CommitHash }" | Out-File footer.tex
 
 Write-Host $Branch
-Compress-Archive -Path "main.tex", "params.tex", "personal-statement.tex", "experience.tex", "skills.tex" -DestinationPath "${OverleafProjectName}.zip" -Force
+Compress-Archive -Path "main.tex", "params.tex", "personal-statement.tex", "experience.tex", "skills.tex", "footer.tex" -DestinationPath "${OverleafProjectName}.zip" -Force
 
+# TODO: add the zip file / project name to .gitignore since I extract it in my workflow
